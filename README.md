@@ -5,5 +5,6 @@ Welcome to our OneView Synergy Automation Demo with Ansible Automation Plattform
 
 
 
+For how to build the execution environment have a look into the folder oneview-ee
 
 
