@@ -2,7 +2,7 @@
   gather_facts: no
   vars:
     - config: '{{  ovconfig_file }}'
-    - server_hardware_type_name: " SY480G10 M1:416SA M3:4820CNA"
+    - server_hardware_type_name: "SY480G10 M1:416SA M3:4820CNA"
     - enclosure_group_name: "3 Frame VC-ETH SAS-Switch"
     - auto_assign_server_hardware: "False"
     - ov_template: "ANSIBLE_OS_Deploy_via_iLO"
