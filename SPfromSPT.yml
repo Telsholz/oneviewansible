@@ -12,7 +12,7 @@
       hpe.oneview.oneview_server_profile:
         config: "{{ config }}"
         data:
-          name: "TEST-Ansible"
+          name: "{{ profile_name }}"
           serverProfileTemplateName: "{{ ov_template }}"
           serverHardwareName:         "{{ ov_server }}"
         params:
