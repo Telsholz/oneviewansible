@@ -9,16 +9,17 @@
     auto_assign_server_hardware: "False"
     ov_template: "ANSIBLE_OS_Deploy_via_iLO"
 
-    - name : "Create Server Profile from Template "
-      hpe.oneview.oneview_server_profile:
-        config: "{{ config }}"
-        data:
-          name: "TEST-Ansible"
-          serverProfileTemplateName: "{{ ov_template }}"
-          serverHardwareName:         "{{ ov_server }}"
-        params:
-          force: True
-      register: mpHostInfo
-      delegate_to: localhost
-    - debug:
-        var:  server_hardware.mpHostInfo.mpIpAddresses[1].address 
+  - name : "Create Server Profile from Template "
+    hpe.oneview.oneview_server_profile:
+      config: "{{ config }}"
+      data:
+        name: "TEST-Ansible"
+        serverProfileTemplateName: "{{ ov_template }}"
+        serverHardwareName:         "{{ ov_server }}"
+      params:
+     force: True
+    register: mpHostInfo
+    delegate_to: localhost
+
+  - debug:
+      var:  server_hardware.mpHostInfo.mpIpAddresses[1].address 
