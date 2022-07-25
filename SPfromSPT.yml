@@ -8,9 +8,7 @@
     enclosure_group_name: "3 Frame VC-ETH SAS-Switch"
     auto_assign_server_hardware: "False"
     ov_template: "ANSIBLE_OS_Deploy_via_iLO"
-	
-	
-	
+
     - name : "Create Server Profile from Template "
       hpe.oneview.oneview_server_profile:
         config: "{{ config }}"
@@ -24,4 +22,3 @@
       delegate_to: localhost
     - debug:
         var:  server_hardware.mpHostInfo.mpIpAddresses[1].address 
-	
