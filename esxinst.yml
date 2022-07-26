@@ -6,7 +6,7 @@
       community.general.redfish_command:
         category: Manager
         command: VirtualMediaInsert
-        baseuri: "10.0.20.90"
+        baseuri: "{{ ilo_ip }}"
         username: "{{ ilo_username }}"
         password: "{{ ilo_password }}"
         virtual_media:
