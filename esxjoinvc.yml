@@ -1,0 +1,26 @@
+- hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: wait for port 22 to become active
+      wait_for:
+        host: "{{myip}}"
+        port: 22
+        delay: 20
+        state: started
+        timeout: 1600
+      when: eject == true
+
+
+    - name: Add ESXi Host to vCenter
+      community.vmware.vmware_host:
+        hostname: '{{ vchost }}'
+        username: '{{ vcuser }}'
+        password: '{{ vcenterPW }}'
+        datacenter_name: '{{vcdc}}'
+        cluster_name: '{{vccluster}}'
+        esxi_hostname: '{{ myip }}'
+        esxi_username: 'root'
+        esxi_password: 'HPE1nvent!'
+        state: present
+        validate_certs: False

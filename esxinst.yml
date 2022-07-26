@@ -23,8 +23,8 @@
         command: SetOneTimeBoot
         bootdevice: "Cd"
         baseuri: "{{ ilo_ip }}"
-        username: "{{ username }}"
-        password: "{{ password }}"
+        username: "{{ ilo_username }}"
+        password: "{{ ilo_password }}"
 
     - name: PowerOn
       vars:
