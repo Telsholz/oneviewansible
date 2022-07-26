@@ -16,14 +16,15 @@
             - DVD
         resource_id: "1"
 
-    - name: SetOneTimeBoot
-      vars:
-        - baseuri: "{{ ilo_ip }}"
-        - username: "{{ ilo_username }}"
-        - password: "{{ ilo_password }}"
-        - bootdevice: "Cd"
-      include_role:
-        name: hpe.ilo.setonetimeboot
+  # tasks file for setonetimeboot
+    - name: Set one-time boot device to Cd
+      redfish_command:
+        category: Systems
+        command: SetOneTimeBoot
+        bootdevice: "Cd"
+        baseuri: "{{ ilo_ip }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
 
     - name: PowerOn
       vars:
