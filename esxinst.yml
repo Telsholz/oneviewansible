@@ -1,14 +1,16 @@
 - hosts: localhost
   gather_facts: no
 
+  vars:
+    baseuri: "{{ ilo_ip }}"
+    username: "{{ ilo_username }}"
+    password: "{{ ilo_password }}"
+
   tasks:
     - name: Insert Virtual Media
       community.general.redfish_command:
         category: Manager
         command: VirtualMediaInsert
-        baseuri: "{{ ilo_ip }}"
-        username: "{{ ilo_username }}"
-        password: "{{ ilo_password }}"
         virtual_media:
           image_url: '{{webserver}}/{{bootiso}}'
           media_types:
