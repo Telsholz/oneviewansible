@@ -1,0 +1,22 @@
+- hosts: ctcautobot
+  gather_facts: no
+  vars:
+    - kstemplate: "esx.j2"
+    - destination: "esx.ks"
+
+  tasks:
+    - name: create custom kickstart file
+      template:
+        src: "{{kstemplate}}"
+        dest:  "{{destination}}"
+      delegate_to: localhost
+
+    - name: Ansible Copy Example Local to Remote
+      become: true 
+      copy:
+        src: "{{destination}}"
+        dest: /var/www/html
+        owner: apache
+        group: apache
+        mode: 0644
+
