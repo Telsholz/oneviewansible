@@ -2,7 +2,7 @@
   gather_facts: no
   vars:
     - kstemplate: "esx.j2"
-    - destination: "esx.ks"
+    - destination: "esx-tower/esx.ks"
 
   tasks:
     - name: create custom kickstart file
