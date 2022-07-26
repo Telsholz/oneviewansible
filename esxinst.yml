@@ -1,16 +1,14 @@
 - hosts: localhost
   gather_facts: no
 
-  vars:
-    baseuri: "{{ ilo_ip }}"
-    username: "{{ ilo_username }}"
-    password: "{{ ilo_password }}"
-
   tasks:
     - name: Insert Virtual Media
       community.general.redfish_command:
         category: Manager
         command: VirtualMediaInsert
+        baseuri: "{{ ilo_ip }}"
+        username: "{{ ilo_username }}"
+        password: "{{ ilo_password }}"
         virtual_media:
           image_url: '{{webserver}}/{{bootiso}}'
           media_types:
@@ -20,11 +18,14 @@
 
     - name: SetOneTimeBoot
       vars:
+        - baseuri: "{{ ilo_ip }}"
         - bootdevice: "Cd"
       include_role:
         name: hpe.ilo.setonetimeboot
 
     - name: PowerOn
+      vars:
+        - baseuri: "{{ ilo_ip }}"
       include_role:  
         name: hpe.ilo.poweron
 
