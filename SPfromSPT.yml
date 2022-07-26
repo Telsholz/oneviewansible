@@ -21,3 +21,6 @@
 
     - debug:
         var:  server_hardware.mpHostInfo.mpIpAddresses[1].address
+    - set_stats:
+        data:
+          ilo_ip: "{{ server_hardware.mpHostInfo.mpIpAddresses[1].address }}"
