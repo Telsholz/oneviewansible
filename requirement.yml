@@ -1,7 +1,0 @@
-
----
-collections:
-# With just the collection name
-- hpe.oneview
-- hpe.ilo
-- community.general
