@@ -1,4 +1,4 @@
-- hosts: ctcautobot
+- hosts: all
   gather_facts: no
   vars:
     - kstemplate: "esx.j2"
