@@ -2,7 +2,7 @@
   gather_facts: no
   vars:
     - kstemplate: "esx.j2"
-    - destination: "esx-tower/esx.ks"
+    - destination: "esx.ks"
 
   tasks:
     - name: create custom kickstart file
@@ -15,7 +15,7 @@
       become: true 
       copy:
         src: "{{destination}}"
-        dest: /var/www/html
+        dest: /var/www/html/esx-tower
         owner: apache
         group: apache
         mode: 0644
