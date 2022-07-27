@@ -56,9 +56,9 @@
       wait_for:
         host: "{{myip}}"
         port: 22
-        delay: 20
+        delay: 2
         state: started
-        timeout: 1600
+        timeout: 1500
 
 
     - name: Add ESXi Host to vCenter
