@@ -15,9 +15,9 @@
 
     - name: Add ESXi Host to vCenter
       community.vmware.vmware_host:
-        hostname: '{{ esxi_hostname }}'
-        username: '{{ esxi_username }}'
-        password: '{{ esxi_password }}'
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ username }}'
+        password: '{{ password }}'
         datacenter_name: '{{vcdc}}'
         cluster_name: '{{vccluster}}'
         esxi_hostname: '{{ myip }}'
