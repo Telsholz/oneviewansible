@@ -4,6 +4,54 @@
     myip: "10.1.70.120"
 
   tasks:
+
+    - name: Create DataCenter Customer Technology Center
+      community.vmware.vmware_datacenter:
+        hostname: '{{ lookup("env", "VMWARE_HOST") }}'
+        username: '{{ lookup("env", "VMWARE_USER") }}'
+        password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+        validate_certs: false
+        datacenter_name: "{{ vcdc }}"
+        state: present
+      delegate_to: localhost
+      
+    - name: Create Cluster 
+      community.vmware.vmware_cluster:
+        hostname: '{{ lookup("env", "VMWARE_HOST") }}'
+        username: '{{ lookup("env", "VMWARE_USER") }}'
+        password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+        validate_certs: false
+        datacenter: "{{ vcdc }}"
+        cluster_name: "{{ vcluster }}"
+       # ignore_ha: true
+       # ignore_drs: true
+       # ignore_vsan: True
+      delegate_to: localhost
+
+    - name: Enable DRS
+      community.vmware.vmware_cluster_drs:
+        hostname: '{{ lookup("env", "VMWARE_HOST") }}'
+        username: '{{ lookup("env", "VMWARE_USER") }}'
+        password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+        validate_certs: false
+        datacenter: "{{ vcdc }}"
+        cluster_name: "{{ vccluster }}"
+        drs_default_vm_behavior: partiallyAutomated
+        enable: True
+      delegate_to: localhost
+      
+    - name: Enable HA without admission control
+      community.vmware.vmware_cluster_ha:
+        hostname: '{{ lookup("env", "VMWARE_HOST") }}'
+        username: '{{ lookup("env", "VMWARE_USER") }}'
+        password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+        validate_certs: false
+        datacenter: '{{ vcdc }}'
+        cluster_name: '{{ vccluster }}'
+        enable: True
+      delegate_to: localhost
+
+
     - name: wait for port 22 to become active
       wait_for:
         host: "{{myip}}"
