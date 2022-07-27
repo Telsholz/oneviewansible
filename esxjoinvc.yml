@@ -22,7 +22,7 @@
         password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
         validate_certs: false
         datacenter: "{{ vcdc }}"
-        cluster_name: "{{ vcluster }}"
+        cluster_name: "{{ vccluster }}"
        # ignore_ha: true
        # ignore_drs: true
        # ignore_vsan: True
