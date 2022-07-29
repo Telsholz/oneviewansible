@@ -3,7 +3,7 @@ OneView automation with Ansible Automation Platform
 
 Welcome to our OneView Synergy Automation Demo with Ansible Automation Plattform 2.x
 
-<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="/Telsholz/oneviewansible/blob/main/images/AAP-Workflow.jpg"><img src="/Telsholz/oneviewansible/blob/main/images/AAP-Workflow.jpg" alt="Workflow" style="max-width: 100%;"></a></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="/Telsholz/oneviewansible/blob/main/images/AAP-Workflow.jpg"><img src="/Telsholz/oneviewansible/raw/main/images/AAP-Workflow.jpg" alt="Workflow" style="max-width: 100%;"></a></p>
 
 
 
