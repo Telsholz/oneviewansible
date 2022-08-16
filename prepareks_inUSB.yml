@@ -3,7 +3,7 @@
   vars:
     - kstemplate: "esx.j2"
     - destination: "ks.cfg"
-    - webserverdir: "/var/www/html/esx-tower"
+    - webserverdir: "/var/www/html/iso"
 
   tasks:
     - name: create custom kickstart file

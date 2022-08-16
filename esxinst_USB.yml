@@ -1,0 +1,51 @@
+- hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Insert Virtual Media
+      community.general.redfish_command:
+        category: Manager
+        command: VirtualMediaInsert
+        baseuri: "{{ ilo_ip }}"
+        username: "{{ ilo_username }}"
+        password: "{{ ilo_password }}"
+        virtual_media:
+          image_url: '{{webserver}}/{{bootiso}}'
+          media_types:
+            - CD
+            - DVD
+        resource_id: "1"
+
+  # tasks file for setonetimeboot
+    - name: Set one-time boot device to Cd
+      redfish_command:
+        category: Systems
+        command: SetOneTimeBoot
+        bootdevice: "Cd"
+        baseuri: "{{ ilo_ip }}"
+        username: "{{ ilo_username }}"
+        password: "{{ ilo_password }}"
+
+    - name: Insert Virtual Media USB
+      community.general.redfish_command:
+        category: Manager
+        command: VirtualMediaInsert
+        baseuri: "{{ ilo_ip }}"
+        username: "{{ ilo_username }}"
+        password: "{{ ilo_password }}"
+        virtual_media:
+          image_url: '{{webserver}}/stickks-{{myhostname}}.img
+          media_types:
+            - USBStick
+        resource_id: "1"
+
+
+    - name: PowerOn
+      vars:
+        - baseuri: "{{ ilo_ip }}"
+        - username: "{{ ilo_username }}"
+        - password: "{{ ilo_password }}"
+      include_role:  
+        name: hpe.ilo.poweron
+
+
