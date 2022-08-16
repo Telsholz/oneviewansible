@@ -42,7 +42,7 @@
 
     - name: prepare usb stick
       become: yes
-      shell: "/tmp/prep_usb.sh "/tmp" {{myhostname}} {{webserverdir}}"
+      shell: "/tmp/prep_usb.sh /tmp {{myhostname}} {{webserverdir}}"
 
     - set_stats:
         data:
