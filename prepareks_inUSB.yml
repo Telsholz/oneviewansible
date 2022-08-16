@@ -35,7 +35,7 @@
       become: true 
       copy:
         src: "{{destination}}"
-        dest: /tmp/esx.ks
+        dest: /tmp/ks.cfg
         owner: apache
         group: apache
         mode: 0666
