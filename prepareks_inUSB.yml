@@ -1,0 +1,16 @@
+- hosts: all
+  gather_facts: no
+  become: yes
+  vars:
+    - kstemplate: "esx.j2"
+    - destination: "esx.ks"
+
+  tasks:
+    - name: create custom kickstart file
+      ansible.builtin.command: ls 
+      register: out
+    - debug: msg={{out}}
+    - name: create custom kickstart file
+      ansible.builtin.command: whoami 
+      register: out
+    - debug: msg={{out}}
