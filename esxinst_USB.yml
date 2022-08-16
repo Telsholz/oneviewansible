@@ -34,7 +34,7 @@
         username: "{{ ilo_username }}"
         password: "{{ ilo_password }}"
         virtual_media:
-          image_url: '{{webserver}}/stickks-{{myhostname}}.img
+          image_url: '{{webserver}}/stickks-{{myhostname}}.img'
           media_types:
             - USBStick
         resource_id: "1"
