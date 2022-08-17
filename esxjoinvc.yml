@@ -68,7 +68,7 @@
         password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
         datacenter_name: '{{vcdc}}'
         cluster_name: '{{vccluster}}'
-        esxi_hostname: '{{ myip }}'
+        esxi_hostname: '{{ myhostname }}.demo.local'
         esxi_username: 'root'
         esxi_password: 'HPE1nvent!'
         state: present
