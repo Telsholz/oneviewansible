@@ -5,8 +5,8 @@ vmaccepteula
 # Set the root password for the DCUI and ESXi Shell
 rootpw HPE1nvent!
 # Install on the first local disk available on machine
-clearpart --firstdisk=remote --overwritevmfs --novmfsondisk
-install --firstdisk=remote --overwritevmfs --novmfsondisk
+clearpart --firstdisk --overwritevmfs 
+install --firstdisk --overwritevmfs 
 # Set the network to DHCP on the first network adapater, use the specified hostname and # Create a portgroup for the VMs
 network --bootproto=static --addvmportgroup=1 --ip={{myip}} --netmask={{smask}} --gateway={{mygw}} --nameserver={{ns}} --hostname={{myhostname}} --device=vmnic0
 # reboots the host after the scripted installation is completed

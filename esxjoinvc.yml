@@ -58,7 +58,7 @@
         port: 22
         delay: 2
         state: started
-        timeout: 1500
+        timeout: 2500
 
 
     - name: Add ESXi Host to vCenter

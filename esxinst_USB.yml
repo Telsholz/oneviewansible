@@ -2,6 +2,30 @@
   gather_facts: no
 
   tasks:
+
+    - name: Get Virtual Media information
+      redfish_info:
+        category: Manager
+        command: GetVirtualMedia
+        baseuri: "{{ ilo_ip }}"
+        username: "{{ ilo_username }}"
+        password: "{{ ilo_password }}"
+      register: result_attr
+
+    - name: eject virtual media
+      community.general.redfish_command:
+        category: Manager
+        command: VirtualMediaEject
+        baseuri: "{{ ilo_ip }}"
+        username: "{{ ilo_username }}"
+        password: "{{ ilo_password }}"
+        virtual_media:
+          image_url: "{{ item.Image  }}"
+          media_types: "{{ item.MediaTypes }}"
+        resource_id: "1"
+      with_items: "{{result_attr.redfish_facts.virtual_media.entries[0] }}"
+      when: item.Image | default(false)
+
     - name: Insert Virtual Media
       community.general.redfish_command:
         category: Manager
