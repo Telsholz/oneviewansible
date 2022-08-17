@@ -21,6 +21,14 @@ esxcfg-vswitch -p "Management Network" vSwitch0
 # Assign an IP-Address to the first VMkernel, this will be used for management
 esxcli network ip dns search add --domain=demo.local
 esxcli network ip dns server add --server={{ns}}
+#Add vMotion Interface
+esxcli network vswitch standard add --vswitch-name=vSwitch1
+esxcli network vswitch standard uplink add --uplink-name=vmnic7 --vswitch-name=vSwitch1
+esxcli network vswitch standard uplink add --uplink-name=vmnic6 --vswitch-name=vSwitch1
+esxcli network vswitch standard portgroup add --portgroup-name=vMotion --vswitch-name=vSwitch1
+esxcli network ip interface add --interface-name=vmk1 --portgroup-name=vMotion
+esxcli network ip interface ipv4 set --interface-name=vmk1 --type=dhcp
+vim-cmd hostsvc/vmotion/vnic_set vmk1
 # Enable SSH and the ESXi Shell
 vim-cmd hostsvc/enable_ssh
 vim-cmd hostsvc/start_ssh
