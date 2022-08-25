@@ -16,6 +16,7 @@ reboot
 #for vcf mgmt set mtu to 9000
 esxcli network vswitch standard set -v vSwitch0 -m 9000
 esxcli network vswitch standard portgroup set --portgroup-name="Management Network" --vlan-id=70
+esxcli network vswitch standard portgroup set --portgroup-name="VM Network" --vlan-id=70
 esxcli system hostname set --fqdn={{myhostname}}.demo.local
 /sbin/generate-certificates
 
