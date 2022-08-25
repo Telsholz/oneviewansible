@@ -15,6 +15,7 @@ reboot
 %firstboot --interpreter=busybox
 #for vcf mgmt set mtu to 9000
 esxcli network vswitch standard set -v vSwitch0 -m 9000
+esxcli system hostname set --fqdn={{myhostname}}.demo.local
 
 
 # Add an extra nic to vSwitch0 (vmnic2)
