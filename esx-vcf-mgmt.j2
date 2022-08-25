@@ -8,13 +8,14 @@ rootpw HPE1nvent!
 clearpart --firstdisk --overwritevmfs 
 install --firstdisk --overwritevmfs 
 # Set the network to DHCP on the first network adapater, use the specified hostname and # Create a portgroup for the VMs
-network --bootproto=static --addvmportgroup=1 --ip={{myip}} --netmask={{smask}} --gateway={{mygw}} --nameserver={{ns}} --hostname={{myhostname}} --device=vmnic0 --vlan-id=70
+network --bootproto=static --addvmportgroup=1 --ip={{myip}} --netmask={{smask}} --gateway={{mygw}} --nameserver={{ns}} --hostname={{myhostname}} --device=vmnic0 
 # reboots the host after the scripted installation is completed
 reboot
 
 %firstboot --interpreter=busybox
 #for vcf mgmt set mtu to 9000
 esxcli network vswitch standard set -v vSwitch0 -m 9000
+esxcli network vswitch standard portgroup set --portgroup-name="Management Network" --vlan-id=70
 esxcli system hostname set --fqdn={{myhostname}}.demo.local
 /sbin/generate-certificates
 
