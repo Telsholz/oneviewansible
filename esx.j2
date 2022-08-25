@@ -29,6 +29,18 @@ esxcli network vswitch standard portgroup add --portgroup-name=vMotion --vswitch
 esxcli network ip interface add --interface-name=vmk1 --portgroup-name=vMotion
 esxcli network ip interface ipv4 set --interface-name=vmk1 --type=dhcp
 vim-cmd hostsvc/vmotion/vnic_set vmk1
+#
+#
+# set ntp config
+#
+
+/etc/init.d/ntpd stop
+esxcli system ntp set -s={{ mygw }}
+esxcli system ntp set -e=yes
+
+/sbin/chkconfig  ntpd on
+/etc/init.d/ntpd start
+#
 # Enable SSH and the ESXi Shell
 vim-cmd hostsvc/enable_ssh
 vim-cmd hostsvc/start_ssh

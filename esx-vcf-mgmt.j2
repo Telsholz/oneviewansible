@@ -46,13 +46,10 @@ esxcli system settings advanced set -o /UserVars/SuppressShellWarning -i 1
 #
 # set ntp config
 #
-cat > /etc/ntp.conf << __NTP_CONFIG__
 
-restrict default kod nomodify notrap noquery nopeer
-restrict 127.0.0.1
-server 10.1.70.1
-driftfile /etc/ntp.drift
-__NTP_CONFIG__
+esxcli system ntp set -s={{ mygw }}
+esxcli system ntp set -e=yes
+
 /sbin/chkconfig  ntpd on
 /etc/init.d/ntpd start
 #esxcli network firewall set --default-action false --enabled yes
