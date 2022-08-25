@@ -16,6 +16,7 @@ reboot
 #for vcf mgmt set mtu to 9000
 esxcli network vswitch standard set -v vSwitch0 -m 9000
 esxcli system hostname set --fqdn={{myhostname}}.demo.local
+/sbin/generate-certificates
 
 
 # Add an extra nic to vSwitch0 (vmnic2)
@@ -58,3 +59,4 @@ esxcli system settings advanced set -o /UserVars/SuppressShellWarning -i 1
 /bin/sut -set mode=AutoDeploy
 /bin/sut -set pollingintervalinminutes=2  #for demo porpuse only,, default 5(minutes)
 echo "done" > /inst.txt
+reboot
