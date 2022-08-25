@@ -8,16 +8,16 @@ rootpw HPE1nvent!
 clearpart --firstdisk --overwritevmfs 
 install --firstdisk --overwritevmfs 
 # Set the network to DHCP on the first network adapater, use the specified hostname and # Create a portgroup for the VMs
-network --bootproto=static --addvmportgroup=1 --ip={{myip}} --netmask={{smask}} --gateway={{mygw}} --nameserver={{ns}} --hostname={{myhostname}} --device=vmnic0
+network --bootproto=static --addvmportgroup=1 --ip={{myip}} --netmask={{smask}} --gateway={{mygw}} --nameserver={{ns}} --hostname={{myhostname}} --device=vmnic0 --vlan-id=70
 # reboots the host after the scripted installation is completed
-esxcli system hostname set --fqdn={{myhostname}}.demo.local
-/sbin/generate-certificates
 reboot
 
+%firstboot --interpreter=busybox
 #for vcf mgmt set mtu to 9000
 esxcli network vswitch standard set -v vSwitch0 -m 9000
+esxcli system hostname set --fqdn={{myhostname}}.demo.local
+/sbin/generate-certificates
 
-%firstboot --interpreter=busybox
 # Add an extra nic to vSwitch0 (vmnic2)
 #esxcli network vswitch standard uplink add --uplink-name=vmnic0 --vswitch-name=vSwitch0
 #esxcli network vswitch standard uplink add -u vmnic1 -v vSwitch0
@@ -61,4 +61,6 @@ esxcli network firewall ruleset set --ruleset-id ntpClient --enabled yes
 #set sut mode for vLCM
 /bin/sut -set mode=AutoDeploy
 /bin/sut -set pollingintervalinminutes=2  #for demo porpuse only,, default 5(minutes)
+
 echo "done" > /inst.txt
+reboot
