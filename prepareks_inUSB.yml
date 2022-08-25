@@ -1,7 +1,7 @@
 - hosts: all
   gather_facts: no
   vars:
-    - kstemplate: "esx.j2"
+    - kstemplate: "{{ ksj2 }}"
     - destination: "ks.cfg"
     - webserverdir: "/var/www/html/iso"
 
