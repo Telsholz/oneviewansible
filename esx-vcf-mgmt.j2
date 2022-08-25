@@ -55,8 +55,8 @@ driftfile /etc/ntp.drift
 __NTP_CONFIG__
 /sbin/chkconfig  ntpd on
 /etc/init.d/ntpd start
-esxcli network firewall set --default-action false --enabled yes
-esxcli network firewall ruleset set --ruleset-id ntpClient --enabled yes
+#esxcli network firewall set --default-action false --enabled yes
+#esxcli network firewall ruleset set --ruleset-id ntpClient --enabled yes
 #
 ##
 
