@@ -47,6 +47,7 @@ esxcli system settings advanced set -o /UserVars/SuppressShellWarning -i 1
 # set ntp config
 #
 
+/etc/init.d/ntpd stop
 esxcli system ntp set -s={{ mygw }}
 esxcli system ntp set -e=yes
 
