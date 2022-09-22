@@ -16,3 +16,8 @@ podman push ghcr.io/<github-user>/<container>:<version>
 </code></pre></div>
 
 
+
+
+For searching the kickstart file on an USB device you have to modify the boot iso and add to the boot.cfg/grub.cfg an option
+ * for ESX: add "ks=usb:/ks.cfg" to the line kernelopt= kernelopt=in <iso>/efi/boot/boot.cfg and create an cusomized iso with e.g. mkisofs
+ * for Rocky: add inst.ks=hd:sda1:/ks.cfg  to the line of linuxefi in <iso>/EFI/BOOT/grub.cfg
