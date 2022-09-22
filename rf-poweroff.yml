@@ -1,0 +1,13 @@
+- hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+    - name: PowerForceOff
+      vars:
+        - baseuri: "{{ ilo_ip }}"
+        - username: "{{ ilo_username }}"
+        - password: "{{ ilo_password }}"
+      include_role:  
+        name: hpe.ilo.powerforceoff
+
