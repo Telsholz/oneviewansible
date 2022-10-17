@@ -1,0 +1,19 @@
+- hosts: localhost
+  gather_facts: no
+  #vars:
+  #  myip: "10.1.70.120"
+
+  tasks:
+
+    - name: Remove ESXi Host from vCenter
+      community.vmware.vmware_host:
+        hostname: '{{ lookup("env", "VMWARE_HOST") }}'
+        username: '{{ lookup("env", "VMWARE_USER") }}'
+        password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+        datacenter_name: '{{vcdc}}'
+        cluster_name: '{{vccluster}}'
+        esxi_hostname: '{{ myhostname }}.demo.local'
+        esxi_username: 'root'
+        esxi_password: 'HPE1nvent!'
+        state: absent
+        validate_certs: False
