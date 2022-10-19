@@ -17,7 +17,7 @@ reboot
 # Add an extra nic to vSwitch0 (vmnic1)
 esxcli network vswitch standard uplink add -u vmnic1 -v vSwitch0
 # Add VLAN to the Management Port Group
-#esxcfg-vswitch -p "Management Network" -v 20 vSwitch0
+esxcfg-vswitch -p "Management Network" -v 80 vSwitch0
 # esxcli network vswitch standard portgroup add --portgroup-name=vMotion --vswitch-# name=vSwitch0
 #esxcli network vswitch standard portgroup set --portgroup-name=vMotion
 #esxcli network ip interface add --interface-name=vmk1 --portgroup-name=vMotion
