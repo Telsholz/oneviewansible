@@ -1,5 +1,5 @@
 
-# Modified Kickstart for VMware Lifecycle Manager Demo
+# Modified Kickstart for VMware Compute Operations Manager Demo
 #
 # Accept the VMware End User License Agreement
 vmaccepteula
@@ -18,12 +18,13 @@ reboot
 esxcli network vswitch standard uplink add -u vmnic1 -v vSwitch0
 # Add VLAN to the Management Port Group
 esxcfg-vswitch -p "Management Network" -v 80 vSwitch0
-# esxcli network vswitch standard portgroup add --portgroup-name=vMotion --vswitch-# name=vSwitch0
-#esxcli network vswitch standard portgroup set --portgroup-name=vMotion
-#esxcli network ip interface add --interface-name=vmk1 --portgroup-name=vMotion
-# esxcli network ip interface ipv4 set --interface-name=vmk1 --type=dhcp
+# Add vMotion to the host
+esxcli network vswitch standard portgroup add --portgroup-name=vMotion --vswitch-name=vSwitch0
+esxcli network ip interface add --interface-name=vmk1 --portgroup-name=vMotion
+esxcli network vswitch standard portgroup set --portgroup-name=vMotion --vlan-id=800
+esxcli network ip interface ipv4 set --interface-name=vmk1 --type=dhcp
 # Enable vMotion on the newly created VMkernel vmk1
-#vim-cmd hostsvc/vmotion/vnic_set vmk1
+vim-cmd hostsvc/vmotion/vnic_set vmk1
 # Add new vSwitch for VM traffic, assign uplinks, create a portgroup and assign a VLAN ID
 # esxcli network vswitch standard add --vswitch-name=vSwitch1
 # esxcli network vswitch standard uplink add --uplink-name=vmnic1 --vswitch-name=vSwitch1
