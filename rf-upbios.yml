@@ -3,10 +3,10 @@
   gather_facts: no
 
   vars:
-    - baseuri: {{ ilo_ip }}
-    - username: {{ ilo_username }}
-    - password: {{ ilo_password }}
-    - bios: {{ bios_version }}
+    - baseuri: "{{ ilo_ip }}"
+    - username: "{{ ilo_username }}"
+    - password: "{{ ilo_password }}"
+    - bios: "{{ bios_version }}"
 
   tasks:
   - name: Simple update
