@@ -19,6 +19,6 @@
       update_image_uri: http://10.1.20.200/iso/{{ bios }}.fwpkg
 
   - name: Pause for 4 minutes to free up the installer queue
-      ansible.builtin.pause:
+      pause:
         minutes: 4
 
