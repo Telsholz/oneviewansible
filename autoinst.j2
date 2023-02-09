@@ -129,6 +129,19 @@
   </ntp-client>
   <partitioning t="list">
     <drive t="map">
+      <skip_list config:type="list">
+        <listentry>
+          <!-- skip devices that use the usb-storage driver -->
+          <skip_key>driver</skip_key>
+          <skip_value>usb-storage</skip_value>
+        </listentry>
+        <listentry>
+          <!-- skip devices that are smaller than 11GB -->
+          <skip_key>size_k</skip_key>
+          <skip_value>11.534.336</skip_value>
+          <skip_if_less_than config:type="boolean">true</skip_if_less_than>
+        </listentry>
+      </skip_list>
       <disklabel>gpt</disklabel>
       <initialize t="boolean">true</initialize>
       <type t="symbol">CT_DISK</type>
