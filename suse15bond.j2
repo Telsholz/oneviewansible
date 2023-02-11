@@ -91,25 +91,28 @@
         <search>demo.local</search>
       </searchlist>
     </dns>
-    <bonding config:type="list">
-      <device>
+    <interfaces t="list">
+      <interface t="map">
+        <bonding_module_opts>mode=active-backup miimon=100</bonding_module_opts>
+        <bonding_slave0>eth0</bonding_slave0>
+        <bonding_slave1>eth1</bonding_slave1>
+        <bootproto>static</bootproto>
+        <ipaddr>{{myip}}</ipaddr>
         <name>bond0</name>
-        <ipaddr config:type="list">
-          <ipaddr>{{myip}}</ipaddr>
-        </ipaddr>
-        <prefix>{{smask}}</prefix>
+        <prefixlen>{{smask}}</prefixlen>
         <startmode>auto</startmode>
-        <bonding_options>mode=balance-rr miimon=100</bonding_options>
-        <slaves config:type="list">
-          <device>
-            <name>eth0</name>
-          </device>
-          <device>
-            <name>eth1</name>
-          </device>
-        </slaves>
-      </device>
-    </bonding>
+      </interface>
+      <interface t="map">
+        <bootproto>none</bootproto>
+        <name>eth0</name>
+        <startmode>hotplug</startmode>
+      </interface>
+      <interface t="map">
+        <bootproto>none</bootproto>
+        <name>eth1</name>
+        <startmode>hotplug</startmode>
+      </interface>  
+    </interfaces>
     <ipv6 t="boolean">true</ipv6>
     <keep_install_network t="boolean">true</keep_install_network>
     <managed t="boolean">false</managed>
