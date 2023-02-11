@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <general t="map">
+    <ask-list t="list"/>
+    <mode t="map">
+      <confirm t="boolean">false</confirm>
+      <final_halt t="boolean">false</final_halt>
+      <final_reboot t="boolean">false</final_reboot>
+      <halt t="boolean">false</halt>
+      <second_stage t="boolean">true</second_stage>
+    </mode>
+    <proposals t="list"/>
+    <signature-handling t="map">
+      <accept_file_without_checksum t="boolean">false</accept_file_without_checksum>
+      <accept_non_trusted_gpg_key t="boolean">false</accept_non_trusted_gpg_key>
+      <accept_unknown_gpg_key t="boolean">false</accept_unknown_gpg_key>
+      <accept_unsigned_file t="boolean">false</accept_unsigned_file>
+      <accept_verification_failed t="boolean">false</accept_verification_failed>
+      <import_gpg_key t="boolean">false</import_gpg_key>
+    </signature-handling>
+    <storage t="map"/>
+  </general>
+  <host t="map">
+    <hosts t="list">
+      <hosts_entry t="map">
+        <host_address>{{myip}}</host_address>
+        <names t="list">
+          <name>{{myhostname}}</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>127.0.0.1</host_address>
+        <names t="list">
+          <name>localhost</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>::1</host_address>
+        <names t="list">
+          <name>localhost ipv6-localhost ipv6-loopback</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>fe00::0</host_address>
+        <names t="list">
+          <name>ipv6-localnet</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>ff00::0</host_address>
+        <names t="list">
+          <name>ipv6-mcastprefix</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>ff02::1</host_address>
+        <names t="list">
+          <name>ipv6-allnodes</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>ff02::2</host_address>
+        <names t="list">
+          <name>ipv6-allrouters</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>ff02::3</host_address>
+        <names t="list">
+          <name>ipv6-allhosts</name>
+        </names>
+      </hosts_entry>
+    </hosts>
+  </host>
+  <language t="map">
+    <languages>en_US</languages>
+  </language>
+  <keyboard t="map">
+    <keymap>german</keymap>
+  </keyboard>
+  <networking t="map">
+    <dns t="map">
+      <dhcp_hostname t="boolean">false</dhcp_hostname>
+      <hostname>{{myhostname}}</hostname>
+      <nameservers t="list">
+        <nameserver>{{ns}}</nameserver>
+      </nameservers>
+      <resolv_conf_policy>auto</resolv_conf_policy>
+      <searchlist t="list">
+        <search>demo.local</search>
+      </searchlist>
+    </dns>
+    <bonding config:type="list">
+      <device>
+        <name>bond0</name>
+		<bootproto>static</bootproto>
+        <ipaddr config:type="list">
+          <ipaddr>{{myip}}</ipaddr>
+        </ipaddr>
+        <prefix>{{smask}}</prefix>
+        <startmode>auto</startmode>
+        <bonding_options>mode=balance-rr miimon=100</bonding_options>
+        <slaves config:type="list">
+          <device>
+            <name>eth0</name>
+          </device>
+          <device>
+            <name>eth1</name>
+          </device>
+        </slaves>
+      </device>
+    </bonding>
+    <ipv6 t="boolean">true</ipv6>
+    <keep_install_network t="boolean">true</keep_install_network>
+    <managed t="boolean">false</managed>
+    <routing t="map">
+      <ipv4_forward t="boolean">false</ipv4_forward>
+      <ipv6_forward t="boolean">false</ipv6_forward>
+      <routes t="list">
+        <route t="map">
+          <destination>default</destination>
+          <device>-</device>
+          <gateway>{{mygw}}</gateway>
+          <netmask>-</netmask>
+        </route>
+      </routes>
+    </routing>
+  </networking>
+  <ntp-client t="map">
+    <ntp_policy/>
+    <ntp_servers t="list">
+      <ntp_server t="map">
+        <address>{{mygw}}</address>
+        <iburst t="boolean">true</iburst>
+        <offline t="boolean">false</offline>
+      </ntp_server>
+    </ntp_servers>
+    <ntp_sync>systemd</ntp_sync>
+  </ntp-client>
+  <partitioning t="list">
+    <drive t="map">
+      <skip_list config:type="list">
+        <listentry>
+          <!-- skip devices that use the usb-storage driver -->
+          <skip_key>driver</skip_key>
+          <skip_value>usb-storage</skip_value>
+        </listentry>
+        <listentry>
+          <!-- skip devices that are smaller than 11GB -->
+          <skip_key>size_k</skip_key>
+          <skip_value>11.534.336</skip_value>
+          <skip_if_less_than config:type="boolean">true</skip_if_less_than>
+        </listentry>
+      </skip_list>
+      <disklabel>gpt</disklabel>
+      <initialize t="boolean">true</initialize>
+      <type t="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+  </partitioning>
+  <services-manager t="map">
+    <default_target>multi-user</default_target>
+    <services t="map">
+      <enable t="list">
+        <service>YaST2-Firstboot</service>
+        <service>YaST2-Second-Stage</service>
+        <service>auditd</service>
+        <service>cron</service>
+        <service>issue-generator</service>
+        <service>kbdsettings</service>
+        <service>sshd</service>
+        <service>systemd-remount-fs</service>
+      </enable>
+    </services>
+  </services-manager>
+  <software t="map">
+    <install_recommended t="boolean">true</install_recommended>
+    <instsource/>
+    <packages t="list">
+      <package>yast2-sudo</package>
+      <package>sudo</package>
+      <package>openssh</package>
+      <package>openSUSE-release</package>
+      <package>glibc</package>
+      <package>iputils</package>
+      <package>nfs-client</package>
+      <package>yast2-nfs-client</package>
+      <package>vim</package>
+      <package>vim-data</package>
+      <package>vim-data-common</package>
+    </packages>
+    <products t="list">
+      <product>Leap</product>
+    </products>
+  </software>
+  <timezone t="map">
+    <timezone>Europe/Berlin</timezone>
+  </timezone>
+  <user_defaults t="map">
+    <expire/>
+    <group>100</group>
+    <groups/>
+    <home>/home</home>
+    <inactive>-1</inactive>
+    <no_groups t="boolean">true</no_groups>
+    <shell>/bin/bash</shell>
+    <skel>/etc/skel</skel>
+    <umask>022</umask>
+  </user_defaults>
+  <users t="list">
+    <user t="map">
+      <authorized_keys t="list"/>
+      <encrypted t="boolean">true</encrypted>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <user_password>$6$URd9/WNHKok5J1N1$1MGSvy/j34kUwAHDBhlWItO7WgiETvQHNnrX2R92g4NVphEMaGvxNhHj7loiX9vi8OsUUp.hlo3mIFaUl2ABg/</user_password>
+      <username>root</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>skoch</fullname>
+      <gid>100</gid>
+      <home>/home/skoch</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact>-1</inact>
+        <max>99999</max>
+        <min>0</min>
+        <warn>7</warn>
+      </password_settings>
+      <shell>/bin/bash</shell>
+      <uid>100</uid>
+      <user_password>$6$Gzbk69ftlFIYUFwL$6ejldEi3TvUefvV2VzNy/U/JEYz09fHd10Bn1KfcUlz/k5LrEsufOFMHEtJ2oF2rWO.l1dGM753j/REDo5FAb/</user_password>
+      <username>skoch</username>
+    </user>
+  </users>
+</profile>
