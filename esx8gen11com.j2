@@ -24,7 +24,7 @@ esxcli network vswitch standard uplink add -u vmnic1 -v vSwitch0
 #esxcli network vswitch standard portgroup set --portgroup-name=vMotion --vlan-id=800
 #esxcli network ip interface ipv4 set --interface-name=vmk1 --type=dhcp
 # Enable vMotion on the newly created VMkernel vmk1
-vim-cmd hostsvc/vmotion/vnic_set vmk1
+vim-cmd hostsvc/vmotion/vnic_set vmk0
 # Add new vSwitch for VM traffic, assign uplinks, create a portgroup and assign a VLAN ID
 # esxcli network vswitch standard add --vswitch-name=vSwitch1
 # esxcli network vswitch standard uplink add --uplink-name=vmnic1 --vswitch-name=vSwitch1
