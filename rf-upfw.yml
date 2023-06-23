@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    - baseuri: "{{ ilo_ip }}"
+    - username: "{{ ilo_username }}"
+    - password: "{{ ilo_password }}"
+    - fwfile: "{{ fwfile }}"
+
+  tasks:
+  - name: Simple update
+    community.general.redfish_command:
+      category: Update
+      command: SimpleUpdate
+      baseuri: "{{ baseuri }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      update_image_uri: http://10.1.20.200/iso/{{ fwfile }}.fwpkg
+
+  - name: Sleep a bit
+    ansible.builtin.wait_for:
+      timeout: 200
