@@ -2,8 +2,8 @@
   gather_facts: no
   vars:
     - config: '{{  ovconfig_file }}'
-    - server_hardware_type_name: "SY480G10 M1:416SA M3:4820CNA"
-    - enclosure_group_name: "3 Frame VC-ETH SAS-Switch"
+    - server_hardware_type_name: "SY 480 Gen11 VC-ETH"
+    - enclosure_group_name: "R6 2Frame VC-ETH SAS-Switch"
     - auto_assign_server_hardware: "False"
 
   tasks:
